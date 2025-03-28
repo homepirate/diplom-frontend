@@ -2,7 +2,7 @@
     class="reg-form" 
     [formGroup]="form"
     (ngSubmit)="onSubmit()">
-    <h1 class="h1 mb60">Вход</h1>
+    <h1 class="h1 mb60">Регистрация</h1>
     <label class="tt-control-label mb16">
         Почта
         <input 
@@ -26,9 +26,12 @@
 
     <label class="tt-control-label mb16">
         Специализация
-        <input 
-        formControlName="specialization"
-        class="tt-input" type="text" placeholder="">
+        <select formControlName="specialization" class="tt-input">
+            <option value="" disabled selected>Выберите специализацию</option>
+            @for (spec of specializations; track spec){
+            <option>{{ spec }}</option>
+            }
+        </select>
     </label>
 
     <label class="tt-control-label mb32">

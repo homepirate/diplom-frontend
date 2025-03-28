@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { SpecializationsService } from '../../data/services/specializations.service';
 
 @Component({
   selector: 'app-registration-page',
@@ -11,8 +12,11 @@ import { Router, RouterLink } from '@angular/router';
 export class RegistrationPageComponent {
 
   router = inject(Router)
+  specializationsService = inject(SpecializationsService)
 
   isPasswordVisible = signal<boolean>(false)
+  specializations: string[] = [];
+
 
   form = new FormGroup({
     email: new FormControl<string | null>(null, Validators.required),
@@ -22,8 +26,20 @@ export class RegistrationPageComponent {
     specialization: new FormControl<string | null>(null, Validators.required),
   })
 
+  ngOnInit(): void {
+    // Подписка на получение списка специализаций
+    this.specializationsService.getSpecializationsList().subscribe(
+      (data) => {
+        this.specializations = data;
+      },
+      (error) => {
+        console.error('Ошибка загрузки специализаций:', error);
+      }
+    );
+  }
+
   onSubmit(){
-    //   console.log(this.form.value)
+      console.log(this.form.value)
     //   if (this.form.valid){
     //     //@ts-ignore
     //     this.authService.login(this.form.value).subscribe(
