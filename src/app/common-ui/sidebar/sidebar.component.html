@@ -1,0 +1,45 @@
+<img 
+    src="" alt="logo"
+    class="ml16 mb20"
+>
+
+<nav>
+    <ul class="main-menu-list">
+        @for (item of menuItems; track item.label){
+        <li>
+            <a class="menu-item" [routerLink]="[item.link]" routerLinkActive="active">
+                <svg [icon]="item.icon"></svg>
+                <span>{{ item.label }}</span>
+            </a>
+        </li>
+    }
+    </ul>
+</nav>
+
+<!-- <p class="medium-text mb20">Подписчики</p>
+
+
+@for (profile of subscribers$ | async; track profile.id){
+<app-subscriber-card [profile]="profile"></app-subscriber-card>
+}
+
+<div class="mt20 to-subscribers">
+    <a
+    [routerLink]="['/subscribers']"
+    class="to-subscribers-link medium-text"
+    >Все подписчики</a>
+    <svg icon="arrow" class="to-subscribers-icon"></svg>
+</div> -->
+
+
+<footer class="sidebar__footer">
+    @if(me; as me){
+        <div class="username-container">
+            <div class="medium-text username-text mb4">{{ me.fullName }}</div>
+            <div class="small-text username-text">code:{{ me.code }}</div>
+        </div>
+    <a [routerLink]="['settings']" class="settings-btn">
+        <svg icon="settings"></svg>
+    </a>
+    }
+</footer>
