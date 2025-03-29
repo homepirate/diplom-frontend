@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-// import { AuthService } from '../../auth/auth.service';
+import { AuthService } from '../../auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -11,7 +11,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class LoginPageComponent {
 
-  // authService = inject(AuthService)
+  authService = inject(AuthService)
   router = inject(Router)
 
   isPasswordVisible = signal<boolean>(false)
@@ -22,15 +22,15 @@ export class LoginPageComponent {
   })
 
   onSubmit(){
-  //   console.log(this.form.value)
-  //   if (this.form.valid){
-  //     //@ts-ignore
-  //     this.authService.login(this.form.value).subscribe(
-  //       res => {
-  //         this.router.navigate([''])
-  //         console.log(res)
-  //       }
-  //     )
-  //   }
+    console.log(this.form.value)
+    if (this.form.valid){
+      //@ts-ignore
+      this.authService.login(this.form.value).subscribe(
+        (        res: any) => {
+          this.router.navigate([''])
+          console.log(res)
+        }
+      )
+    }
   }
 }

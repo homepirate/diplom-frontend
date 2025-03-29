@@ -2,6 +2,8 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { SpecializationsService } from '../../data/services/specializations.service';
+import { AuthService } from '../../auth/auth.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-registration-page',
@@ -13,6 +15,8 @@ export class RegistrationPageComponent {
 
   router = inject(Router)
   specializationsService = inject(SpecializationsService)
+  authService = inject(AuthService)
+
 
   isPasswordVisible = signal<boolean>(false)
   specializations: string[] = [];
@@ -40,14 +44,32 @@ export class RegistrationPageComponent {
 
   onSubmit(){
       console.log(this.form.value)
-    //   if (this.form.valid){
-    //     //@ts-ignore
-    //     this.authService.login(this.form.value).subscribe(
-    //       res => {
-    //         this.router.navigate([''])
-    //         console.log(res)
-    //       }
-    //     )
-    //   }
+      if (this.form.valid){
+        //@ts-ignore
+        this.authService.register(this.form.value).pipe(
+          switchMap((res: any) => {
+            // Здесь можно проверить статус ответа, если нужно:
+            if (res.status === 'CREATED') {
+              // Если регистрация успешна, вызываем логин
+              return this.authService.login({
+                email: this.form.value.email!,
+                password: this.form.value.password!
+              });
+            } else {
+              throw new Error('Ошибка регистрации');
+            }
+          })
+        ).subscribe({
+          next: (loginRes) => {
+            console.log('Логин успешен', loginRes);
+            // Переход на основную страницу
+            this.router.navigate(['']);
+          },
+          error: (err) => {
+            console.error('Ошибка при регистрации или логине:', err);
+          }
+        });
+  
+      }        
     }
 }
