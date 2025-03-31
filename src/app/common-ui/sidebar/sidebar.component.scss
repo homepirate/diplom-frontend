@@ -77,6 +77,8 @@
     grid-template-columns: 32px 1fr 16px;
     grid-gap: 12px;
     align-items: center;
+    white-space: nowrap;
+
 
     .footer__profile-img {
         width: 32px;

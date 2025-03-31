@@ -1,0 +1,8 @@
+<div class="profile-card__wrapper">
+    @for (patient of patients(); track patient.fullName){
+        <app-patient-card
+        [patient]="patient"
+        >
+        </app-patient-card>
+    }
+</div>

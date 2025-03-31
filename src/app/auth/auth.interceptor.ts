@@ -3,17 +3,14 @@ import { inject } from "@angular/core";
 import { AuthService } from "./auth.service";
 import { BehaviorSubject, catchError, filter, switchMap, tap, throwError } from "rxjs";
 
-let isRefresing$ = new BehaviorSubject<boolean>(false)
 
 export const AuthTokenInterceptor: HttpInterceptorFn = (req, next) => {
     const authService = inject(AuthService)
-    const token = authService.token
+    const token = authService.getToken()
 
     if (!token){
+        console.log("No token")
         return next(req)
-    }
-
-    if (isRefresing$.value){
     }
 
     return next(addToken(req, token)).pipe(

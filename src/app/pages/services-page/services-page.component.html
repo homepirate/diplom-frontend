@@ -1,0 +1,8 @@
+<div class="profile-card__wrapper">
+    @for (service of services(); track service.name){
+        <app-service-card
+        [service]="service"
+        >
+        </app-service-card>
+    }
+</div>

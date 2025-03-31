@@ -24,6 +24,13 @@ export class AuthService {
       return !!this.token
     }
 
+    getToken(): string | null {
+      if (!this.token) {
+          this.token = this.cookieService.get('token') || null;
+      }
+      return this.token;
+  }
+
     login(payload: {email: string, password: string}) {
       return this.http.post<TokenResponse>(`${this.baseApiUrl}auth/login`, payload).pipe(
         tap(val =>  this.saveTokens(val))
@@ -43,7 +50,6 @@ export class AuthService {
 
     saveTokens(res: TokenResponse) {
       this.token = res.token
-
       this.cookieService.set('token', this.token)
     }
 }

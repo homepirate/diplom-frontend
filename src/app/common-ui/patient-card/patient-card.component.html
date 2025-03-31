@@ -1,0 +1,16 @@
+@if (patient){
+    <div class="profile-card mb16">
+        <div class="avatar-name">
+            <div class="profile-card__name">
+                <strong class="h6">{{ patient.fullName }}</strong>
+            </div>
+        </div>
+
+        <div class="profile-card-__description">Дата рождения: {{ patient.birthDate }}</div>
+        <div class="profile-card__action-btns">
+                <button class="btn">Записи</button>
+                <button class="btn ml16">Добавить запись</button>
+
+        </div> 
+    </div>
+}
