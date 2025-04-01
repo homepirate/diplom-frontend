@@ -1,7 +1,9 @@
+<app-service-create (serviceCreated)="refreshServices()"></app-service-create>
 <div class="profile-card__wrapper">
     @for (service of services(); track service.name){
         <app-service-card
         [service]="service"
+        (priceUpdated)="refreshServices()"
         >
         </app-service-card>
     }

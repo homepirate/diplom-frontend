@@ -18,4 +18,12 @@ export class DoctorService {
   getDoctorPatients(){
     return this.http.get<Patient[]>(`${this.baseApiUrl}patients`);
   }
+
+  createService(payload: {name: string, price: string}){
+    return this.http.post<Object>(`${this.baseApiUrl}services`, payload)
+  }
+
+  updatePriceService(payload: {name: string, price: string}){
+    return this.http.put<Object>(`${this.baseApiUrl}services/update-price`, payload)
+  }
 }

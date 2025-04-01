@@ -1,0 +1,15 @@
+
+<form class="service-create-form mb32" [formGroup]="addServiceForm" (ngSubmit)="onSubmit()">
+    <label class="tt-form-label">
+        <span class="tt-form-label__text">Название</span>
+        <input type="text" class="tt-form-input" formControlName="name">
+    </label>
+
+    <label class="tt-form-label">
+        <span class="tt-form-label__text">Цена</span>
+        <input type="text" class="tt-form-input" formControlName="price">
+    </label>
+    <div class="add-service__action-btns">
+        <button class="btn" type="submit">Добавить</button>
+    </div>
+</form>

@@ -22,7 +22,7 @@ export class SidebarComponent {
 
   menuItems = [
     {
-      label: 'Моя страница',
+      label: 'Записи',
       icon: 'home', 
       link: 'profile/me',
     },

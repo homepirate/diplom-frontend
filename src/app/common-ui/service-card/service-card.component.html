@@ -8,7 +8,21 @@
 
         <div class="profile-card-__description">Цена: {{ service.price }}</div>
         <div class="profile-card__action-btns">
-                <button class="btn">Изменить</button>
+            <button class="btn" (click)="toggleEdit()">
+                {{ editing ? 'Закрыть' : 'Изменить' }}
+            </button>
         </div> 
     </div>
+
+    @if (editing) {
+        <div class="edit-modal">
+          <div class="edit-grid mb16">
+            <label class="tt-form-label">
+              <span class="tt-form-label__text">Новая цена:</span>
+              <input type="text" class="tt-form-input small" [(ngModel)]="newPrice">
+            </label>
+            <button class="btn small" (click)="submitPrice()">Сохранить</button>
+          </div>
+        </div>
+      }
 }

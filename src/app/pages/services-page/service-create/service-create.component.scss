@@ -1,0 +1,12 @@
+.service-create-form{
+    padding: 16px 20px;
+    background: var(--dark-color);
+    border: 1px solid var(--light-color);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 16px;
+}
+
+.add-service__action-btns {
+    display: flex;
+  }
