@@ -1,0 +1,11 @@
+.calendar-page__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 16px;
+  }
+  
+  .calendar-page__calendar,
+  .calendar-page__visits {
+    padding: 8px;
+  }
+  

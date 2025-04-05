@@ -1,10 +1,13 @@
-<!-- calendar-page.component.html -->
 <div class="calendar-page__body">
-    <!-- Компонент календаря -->
-    <app-calendar (daySelected)="onDaySelected($event)"></app-calendar>
-    <!-- Компонент списка визитов за выбранный день -->
-    @for (visit of visitsByDay; track visit.visitId) {
-        <app-visit-card [visit]="visit"></app-visit-card>
-    }
+    <div class="calendar-page__grid">
+      <div class="calendar-page__calendar">
+        <app-calendar (daySelected)="onDaySelected($event)"></app-calendar>
+      </div>
+      <div class="calendar-page__visits">
+        @for (visit of visitsByDay; track visit.visitId) {
+          <app-visit-card [visit]="visit"></app-visit-card>
+        }
+      </div>
+    </div>
   </div>
   
