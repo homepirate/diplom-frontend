@@ -6,6 +6,7 @@ import { RegistrationPageComponent } from './pages/registration-page/registratio
 import { LayoutComponent } from './common-ui/layout/layout.component';
 import { ServicesPageComponent } from './pages/services-page/services-page.component';
 import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
+import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 // import { canActivateAuth } from './auth/access.guard';
 // import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
@@ -14,6 +15,7 @@ export const routes: Routes = [
     //     {path: '', redirectTo: 'profile/me', pathMatch: 'prefix'},
     //     {path: 'profile/:id', component: ProfilePageComponent},
     //     {path: 'settings', component: SettingsPageComponent},
+        {path: 'calendar', component: CalendarPageComponent},
         {path: 'services', component: ServicesPageComponent},
         {path: 'patients', component: PatientsPageComponent},
 

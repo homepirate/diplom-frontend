@@ -1,0 +1,19 @@
+<div class="calendar-header">
+  <button class="btn mounth-btn" (click)="prevMonth()">Предыдущий месяц</button>
+  <span class="current-month">{{ currentYear }} - {{ currentMonth }}</span>
+  <button class="btn mounth-btn" (click)="nextMonth()">Следующий месяц</button>
+</div>
+
+<div class="calendar">
+  @for (day of days; track day) {
+    <div 
+      class="calendar-day"
+      (click)="selectDay(day)"
+      [ngClass]="{'with-border': day.visitsCount > 0, 'selected': selectedDay === day.date}">
+        <span class="day-number">{{ day.date | date:'d' }}</span>
+        @if (day.visitsCount > 0) {
+          <span class="visits-count">{{ day.visitsCount }}</span>
+        }
+    </div>
+  }
+</div>

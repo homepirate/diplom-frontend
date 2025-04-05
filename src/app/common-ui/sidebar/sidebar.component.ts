@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
-import { firstValueFrom } from 'rxjs';
 import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { DecodedToken } from '../../auth/auth.interface';
 import { CookieService } from 'ngx-cookie-service';
@@ -24,7 +23,7 @@ export class SidebarComponent {
     {
       label: 'Записи',
       icon: 'home', 
-      link: 'profile/me',
+      link: 'calendar',
     },
     {
       label: 'Чат',

@@ -1,0 +1,13 @@
+@if (visit){
+    <div class="profile-card mb16">
+        <div class="avatar-name">
+            <div class="profile-card__name">
+                <strong class="h6">{{ visit.visitDate | date: 'HH:mm'}}</strong>
+            </div>
+        </div>
+        <div class="profile-card-__description">Пациент: {{ visit.patientName }}</div>
+        <div class="profile-card-__description">{{visit.notes}}</div>
+        <div class="profile-card-__description">Статус: {{visit.isFinished}}</div>
+    </div>
+
+}
