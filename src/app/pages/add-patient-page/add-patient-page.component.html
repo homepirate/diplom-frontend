@@ -1,0 +1,33 @@
+<form 
+    class="patient-form" 
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+    <h1 class="h1 mb60">Добавить пациента</h1>
+
+    <label class="tt-control-label mb16">
+        <input 
+        formControlName="phone"
+        class="tt-input" type="tel" placeholder="Введите телефон">
+    </label>
+
+    <label class="tt-control-label mb16">
+        ФИО
+        <input 
+        formControlName="fullName"
+        class="tt-input" type="text" placeholder="Введите ФИО">
+    </label>
+
+    <label class="tt-control-label mb16">
+        Дата рождения
+        <input 
+            formControlName="birthDate"
+            class="tt-input" 
+            type="date"
+            placeholder="Выберите дату рождения">
+    </label>
+
+
+    <button class="btn btn-shadow mb16" type="submit">Добавить пациента</button>
+
+</form>
+<!-- <img src="/assetrs/svg/logo-big.srv" alt="logo"> -->

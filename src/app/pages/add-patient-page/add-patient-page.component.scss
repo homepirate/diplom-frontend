@@ -1,0 +1,14 @@
+:host {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100dvh;
+    margin: 0 5%;
+}
+
+.patient-form {
+    width: 700px;
+}
+
+.tt-input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }

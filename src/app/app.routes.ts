@@ -7,6 +7,7 @@ import { LayoutComponent } from './common-ui/layout/layout.component';
 import { ServicesPageComponent } from './pages/services-page/services-page.component';
 import { PatientsPageComponent } from './pages/patients-page/patients-page.component';
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
+import { AddPatientPageComponent } from './pages/add-patient-page/add-patient-page.component';
 // import { canActivateAuth } from './auth/access.guard';
 // import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
@@ -18,6 +19,7 @@ export const routes: Routes = [
         {path: 'calendar', component: CalendarPageComponent},
         {path: 'services', component: ServicesPageComponent},
         {path: 'patients', component: PatientsPageComponent},
+        {path: 'add-patient', component: AddPatientPageComponent}
 
 
     ],

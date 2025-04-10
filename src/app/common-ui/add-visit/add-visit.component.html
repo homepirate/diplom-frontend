@@ -1,0 +1,35 @@
+<form 
+    class="visit-form" 
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+    <h1 class="h2 mb16">Добавить запись</h1>
+
+    <label class="tt-control-label mb16">
+        Дата
+        <input 
+            formControlName="visitDate"
+            class="tt-input" 
+            type="datetime-local"
+            placeholder="Выберите дату">
+    </label>
+
+    <label class="tt-control-label mb16">
+        Пациент
+        <select formControlName="patientId" class="tt-input">
+            <option value="" disabled selected>Выберите пациента</option>
+            @for (patient of patients(); track patient.id){
+            <option [value]="patient.id">{{ patient.fullName }}</option>
+            }
+        </select>
+
+        <label class="tt-control-label mb16">
+            Заметка
+            <input 
+            formControlName="notes"
+            class="tt-input" type="text" placeholder="Введите текст">
+        </label>
+    </label>
+
+
+    <button class="btn btn-shadow mb16" type="submit">Добавить запись</button>
+</form>

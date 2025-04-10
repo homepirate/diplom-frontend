@@ -40,6 +40,11 @@ export class SidebarComponent {
       icon: 'search', 
       link: 'services',
     },
+    {
+      label: 'Добавить пациента',
+      icon: 'search', 
+      link: 'add-patient',
+    },
   ]
 
   

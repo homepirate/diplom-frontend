@@ -1,0 +1,9 @@
+:host {
+    display: grid;
+    height: 100dvh;
+    margin: 0 5%;
+}
+
+.tt-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }

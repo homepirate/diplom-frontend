@@ -25,6 +25,14 @@ export class DoctorService {
     return this.http.post<Object>(`${this.baseApiUrl}services`, payload)
   }
 
+  createVisit(payload: {patientId: string, visitDate: string, notes: string, force: boolean}){
+    return this.http.post<Object>(`${this.baseApiUrl}visits`, payload)
+  }
+
+  addPatient(payload: {fullName: string, phone: string, birthDate: string}){
+    return this.http.post<Object>(`${this.baseApiUrl}add-patient`, payload)
+  }
+
   updatePriceService(payload: {name: string, price: string}){
     return this.http.put<Object>(`${this.baseApiUrl}services/update-price`, payload)
   }
