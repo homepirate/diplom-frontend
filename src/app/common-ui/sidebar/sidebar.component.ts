@@ -22,7 +22,7 @@ export class SidebarComponent {
   menuItems = [
     {
       label: 'Записи',
-      icon: 'home', 
+      icon: 'calendar', 
       link: 'calendar',
     },
     {
@@ -32,18 +32,23 @@ export class SidebarComponent {
     },
     {
       label: 'Пациенты',
-      icon: 'search', 
+      icon: 'people', 
       link: 'patients',
     },
     {
       label: 'Услуги',
-      icon: 'search', 
+      icon: 'services', 
       link: 'services',
     },
     {
       label: 'Добавить пациента',
-      icon: 'search', 
+      icon: 'add-user', 
       link: 'add-patient',
+    },
+    {
+      label: 'Сформировать отчет',
+      icon: 'add-user', 
+      link: 'report',
     },
   ]
 
