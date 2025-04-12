@@ -3,7 +3,6 @@ import { VisitCardComponent } from '../../common-ui/visit-card/visit-card.compon
 import { DoctorService } from '../../data/services/doctor.service';
 import { VisitDateResponse } from '../../data/interfaces/visitDateResponse.interface';
 import { CalendarComponent } from '../../common-ui/calendar/calendar.component';
-import { AddPatientPageComponent } from "../add-patient-page/add-patient-page.component";
 import { AddVisitComponent } from "../../common-ui/add-visit/add-visit.component";
 
 @Component({
@@ -38,7 +37,12 @@ export class CalendarPageComponent {
     if (this.selectedDate) {
       this.doctorService.getDoctorVisitsByDay(this.selectedDate)
         .subscribe((visits: VisitDateResponse[]) => {
-          this.visitsByDay = visits;
+          // Сортировка массива по дате визита (от ранней к поздней)
+          this.visitsByDay = visits.sort((a, b) => {
+            const dateA = new Date(a.visitDate);
+            const dateB = new Date(b.visitDate);
+            return dateA.getTime() - dateB.getTime();
+          });
         });
     }
   }

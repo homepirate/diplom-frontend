@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { NotificationService } from '../../data/services/notification.service';
 
 @Component({
   selector: 'app-login-page',
@@ -13,6 +14,7 @@ export class LoginPageComponent {
 
   authService = inject(AuthService)
   router = inject(Router)
+  notificationService = inject(NotificationService)
 
   isPasswordVisible = signal<boolean>(false)
 
@@ -27,6 +29,7 @@ export class LoginPageComponent {
       //@ts-ignore
       this.authService.login(this.form.value).subscribe(
         (        res: any) => {
+          this.notificationService.initialize()
           this.router.navigate([''])
           console.log(res)
         }
