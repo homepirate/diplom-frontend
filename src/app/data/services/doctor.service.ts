@@ -45,8 +45,8 @@ export class DoctorService {
     return this.http.get<VisitDateResponse[]>(`${this.baseApiUrl}visits/day?date=${date}`);
   }
 
-  getFinancialDashboardReport(reportRequest: { startDate: string; endDate: string }): Observable<Blob> {
-    return this.http.post(`${this.baseApiUrl}report`, reportRequest, { responseType: 'blob' });
+  getFinancialDashboardReport(payload: { startDate: string; endDate: string }): Observable<Blob> {
+    return this.http.post(`${this.baseApiUrl}report`, payload, { responseType: 'blob' });
   }
-  
+
 }

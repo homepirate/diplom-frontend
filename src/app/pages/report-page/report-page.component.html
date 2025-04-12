@@ -1,1 +1,29 @@
-<p>report-page works!</p>
+<form 
+    class="date-form" 
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()">
+    <h1 class="h1 mb60">Создать и получить отчет</h1>
+    <label class="tt-control-label mb16">
+        Дата начала
+        <input 
+        formControlName="startDate"
+        class="tt-input" type="date" placeholder="выбрать дату">
+    </label>
+
+    <label class="tt-control-label mb16">
+        Дата конца
+        <input 
+        formControlName="endDate"
+        class="tt-input" type="date" placeholder="выбрать дату">
+    </label>
+
+
+    <button class="btn btn-shadow mb16" type="submit">Сформировать отчет</button>
+</form>
+
+@if(pdfUrl){
+<div class="pdf-viewer">
+    <iframe [src]="pdfUrl" class="pdf-frame mb16"></iframe>
+    <a class="btn btn-shadow download-btn" [href]="pdfUrl" download="report.pdf">Скачать отчет</a>
+</div>
+}

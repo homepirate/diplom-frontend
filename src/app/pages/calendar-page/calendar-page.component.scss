@@ -2,10 +2,17 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 16px;
+    height: 95vh;
   }
   
-  .calendar-page__calendar,
-  .calendar-page__visits {
+  .calendar-page__calendar{
     padding: 8px;
+    position: sticky;
+    top: 0;
   }
-  
+
+
+.calendar-page__visits{
+  padding: 8px;
+  overflow-y: auto;
+  }
