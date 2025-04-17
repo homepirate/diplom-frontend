@@ -1,0 +1,21 @@
+@if(profile) { 
+    <div class="field-group username-and-name">
+        <label class="field-label">Полное имя:</label>
+        <h1 class="h4">{{ profile.fullName }}</h1>
+      </div>
+    
+      <div class="field-group">
+        <label class="field-label">Дата рождения:</label>
+        <h1 class="h4">{{ profile.birthDate }}</h1>
+      </div>
+    
+      <div class="field-group">
+        <label class="field-label">Электронная почта:</label>
+        <h1 class="h4">{{ profile.email }}</h1>
+      </div>
+    
+      <div class="field-group">
+        <label class="field-label">Телефон:</label>
+        <h1 class="h4">{{ profile.phone }}</h1>
+    </div>
+}

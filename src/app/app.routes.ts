@@ -9,13 +9,14 @@ import { PatientsPageComponent } from './pages/patients-page/patients-page.compo
 import { CalendarPageComponent } from './pages/calendar-page/calendar-page.component';
 import { AddPatientPageComponent } from './pages/add-patient-page/add-patient-page.component';
 import { ReportPageComponent } from './pages/report-page/report-page.component';
-// import { canActivateAuth } from './auth/access.guard';
+import { canActivateAuth } from './auth/access.guard';
+import { PatientProfilePageComponent } from './pages/patient-profile-page/patient-profile-page.component';
 // import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
 export const routes: Routes = [
     {path: '', component: LayoutComponent, children: [
-    //     {path: '', redirectTo: 'profile/me', pathMatch: 'prefix'},
-    //     {path: 'profile/:id', component: ProfilePageComponent},
+        {path: '', redirectTo: 'calendar', pathMatch: 'prefix'},
+        {path: 'profile/:id', component: PatientProfilePageComponent},
     //     {path: 'settings', component: SettingsPageComponent},
         {path: 'calendar', component: CalendarPageComponent},
         {path: 'services', component: ServicesPageComponent},
@@ -25,7 +26,7 @@ export const routes: Routes = [
 
 
     ],
-    // canActivate: [canActivateAuth]
+    canActivate: [canActivateAuth]
     },
     {path: 'login', component: LoginPageComponent},
     {path: 'registration', component: RegistrationPageComponent}

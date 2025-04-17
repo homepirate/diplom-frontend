@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;                      
+  gap: 20px; 
+}
+  
+  .field-label {
+    display: block;
+  }
+  
+  .username-and-name {
+    text-align: left;
+  }

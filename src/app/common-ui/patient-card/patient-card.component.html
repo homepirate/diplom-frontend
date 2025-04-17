@@ -8,7 +8,7 @@
 
         <div class="profile-card-__description">Дата рождения: {{ patient.birthDate }}</div>
         <div class="profile-card__action-btns">
-                <button class="btn">Записи</button>
+                <button class="btn" [routerLink]="['/profile', patient.id]">Профиль</button>
                 <button class="btn ml16">Добавить запись</button>
 
         </div> 

@@ -1,12 +1,15 @@
 import { inject } from "@angular/core"
 import { AuthService } from "./auth.service"
 import { Router } from "@angular/router"
+import { CookieService } from "ngx-cookie-service"
 
 export const canActivateAuth = () => {
-    const isLoggedIn = inject(AuthService).isAuth
+    const cookieSvc   = inject(CookieService);
 
-    if (isLoggedIn) {
-        return true
+
+    if (!cookieSvc.check('token')) {
+        return inject(Router).createUrlTree(['/login'])
     }
-    return inject(Router).createUrlTree(['/login'])
+
+    return
 }

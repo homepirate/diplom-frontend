@@ -1,0 +1,10 @@
+<header class="mb32 profile-page__header">
+    @if (patient$ | async; as patient){
+        <app-profile-header [profile]="patient"> </app-profile-header>
+    }    
+</header>
+
+<div class="profile-page__body">
+    <app-add-visit   [fixedPatientId]="patientId"
+    (visitCreated)="onVisitCreated()">></app-add-visit>
+</div>

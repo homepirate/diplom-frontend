@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DoctorService } from '../../data/services/doctor.service';
 import { Patient } from '../../data/interfaces/patient.inerface';
@@ -14,8 +14,18 @@ export class AddVisitComponent {
 
   doctorService = inject(DoctorService)
   patients = toSignal(this.doctorService.getDoctorPatients(), { initialValue: [] as Patient[] })
+
+  @Input() fixedPatientId?: string;
+
   @Output() visitCreated = new EventEmitter<void>();
 
+
+  ngOnInit() {
+    if (this.fixedPatientId) {
+      this.form.get('patientId')!.setValue(this.fixedPatientId);
+      this.form.get('patientId')!.disable();
+    }
+  }
 
   form = new FormGroup({
     patientId: new FormControl<string | null>(null, Validators.required),
@@ -30,7 +40,10 @@ export class AddVisitComponent {
       return;
     }
 
-    const { patientId, visitDate, notes } = this.form.value;
+    const patientId = this.fixedPatientId
+    ?? this.form.getRawValue().patientId!;
+
+    const { visitDate, notes } = this.form.value;
     if (!patientId || !visitDate || !notes) {
       console.warn('Не все поля заполнены!');
       return;
