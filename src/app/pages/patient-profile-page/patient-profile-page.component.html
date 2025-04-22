@@ -5,6 +5,17 @@
 </header>
 
 <div class="profile-page__body">
-    <app-add-visit   [fixedPatientId]="patientId"
+    <app-add-visit [fixedPatientId]="patientId"
     (visitCreated)="onVisitCreated()">></app-add-visit>
+    <div class="profile-page__visits">
+        @for (visit of visits; track visit.visitId) {
+          <app-visit-card [visit]="visit" [hidePatient]="true"></app-visit-card>
+
+          <!-- TODO ОТОБРАЖАТЬ СПИСОК ВЛОЖЕНИЙ ПРИ НАЖАТИЕ НА КНОПКУ в app-visit-card -->
+          <div class="attachments">
+            @for(att of attachmentUrls; track att){
+            }
+        </div>
+        }
+      </div>
 </div>
