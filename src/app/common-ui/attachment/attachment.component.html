@@ -1,1 +1,9 @@
-<p>attachment works!</p>
+<a
+  class="attachment-link"
+  [href]="attachmentUrl"
+  [attr.download]="fileName"
+  target="_blank"
+  rel="noopener"
+>
+  {{ fileName }}
+</a>

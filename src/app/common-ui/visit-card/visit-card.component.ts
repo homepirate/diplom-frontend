@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { VisitDateResponse } from '../../data/interfaces/visitDateResponse.interface';
 import { DatePipe } from '@angular/common';
 import { PatientVisitDetailsResponse } from '../../data/interfaces/PatientVisitDetailsResponse.interface';
@@ -14,6 +14,9 @@ export class VisitCardComponent {
   @Input() visit!: VisitDateResponse | PatientVisitDetailsResponse;
   @Input() hidePatient: boolean = false;
 
+  @Output() viewAttachments = new EventEmitter<void>();
+
+
   isVisitDateResponse(v: VisitDateResponse | PatientVisitDetailsResponse): v is VisitDateResponse {
     return (v as VisitDateResponse).patientName !== undefined;
   }
@@ -23,7 +26,11 @@ export class VisitCardComponent {
   }
 
 
-  onViewAttachments(){
-
+  onViewAttachments() {
+    if (this.isPatientVisitDetailsResponse(this.visit)){
+        console.log(this.visit.attachmentUrls)
+    }
+    this.viewAttachments.emit();
   }
+
 }

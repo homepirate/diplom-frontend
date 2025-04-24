@@ -4,3 +4,8 @@
     grid-gap: 32px;
     grid-template-columns: 400px 1fr;
 }
+
+.attachments {
+    display: flex;
+    flex-direction: column;
+}

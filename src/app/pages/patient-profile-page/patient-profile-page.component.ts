@@ -8,10 +8,11 @@ import { AsyncPipe } from '@angular/common';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
 import { VisitCardComponent } from '../../common-ui/visit-card/visit-card.component';
 import { PatientVisitDetailsResponse } from '../../data/interfaces/PatientVisitDetailsResponse.interface';
+import { AttachmentComponent } from '../../common-ui/attachment/attachment.component';
 
 @Component({
   selector: 'app-patient-profile-page',
-  imports: [AddVisitComponent, AsyncPipe, ProfileHeaderComponent, VisitCardComponent],
+  imports: [AddVisitComponent, AsyncPipe, ProfileHeaderComponent, VisitCardComponent, AttachmentComponent],
   templateUrl: './patient-profile-page.component.html',
   styleUrl: './patient-profile-page.component.scss'
 })
@@ -20,6 +21,16 @@ export class PatientProfilePageComponent  implements OnInit{
   patient$!: Observable<PatientProfile>;
   visits: PatientVisitDetailsResponse[] = [];
   attachmentUrls: string[] = [];
+
+  expandedVisitIds = new Set<string>();
+
+  onToggleAttachments(visitId: string) {
+    if (this.expandedVisitIds.has(visitId)) {
+      this.expandedVisitIds.delete(visitId);
+    } else {
+      this.expandedVisitIds.add(visitId);
+    }
+  }
   
 
   route = inject(ActivatedRoute)

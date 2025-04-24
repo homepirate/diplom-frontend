@@ -9,13 +9,21 @@
     (visitCreated)="onVisitCreated()">></app-add-visit>
     <div class="profile-page__visits">
         @for (visit of visits; track visit.visitId) {
-          <app-visit-card [visit]="visit" [hidePatient]="true"></app-visit-card>
+          <app-visit-card [visit]="visit" [hidePatient]="true" 
+          (viewAttachments)="onToggleAttachments(visit.visitId)"></app-visit-card>
 
-          <!-- TODO ОТОБРАЖАТЬ СПИСОК ВЛОЖЕНИЙ ПРИ НАЖАТИЕ НА КНОПКУ в app-visit-card -->
-          <div class="attachments">
-            @for(att of attachmentUrls; track att){
-            }
-        </div>
+          @if (expandedVisitIds.has(visit.visitId)) {
+            <div class="attachments mb16">
+                @if (visit.attachmentUrls.length > 0) {
+                    @for (url of visit.attachmentUrls; track url) {
+                      <app-attachment [attachmentUrl]="url" class="mb4"></app-attachment>
+                    }
+                  }
+                  @else {
+                    <p>Вложения отсутствуют</p>
+                  }
+            </div>
+          }
         }
       </div>
 </div>

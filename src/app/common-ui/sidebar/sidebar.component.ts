@@ -47,7 +47,7 @@ export class SidebarComponent {
     },
     {
       label: 'Сформировать отчет',
-      icon: 'add-user', 
+      icon: 'report', 
       link: 'report',
     },
   ]
