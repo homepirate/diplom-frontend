@@ -1,0 +1,6 @@
+<div class="chat-prev"
+  [class.active]="active"
+  (click)="onClick()">
+    <div class="chat-prev__name h6">{{ chat.partnerName }}</div>
+    <div class="chat-prev__last">{{ chat.lastMessage }}</div>
+  </div>

@@ -1,0 +1,15 @@
+<div class="chats-list">
+    @for (chat of chats; track chat){
+        <app-chat-prev [chat]="chat" 
+        [active]="chat === selectedChat"
+        (click)="selectChat(chat)"></app-chat-prev>
+    }
+</div>
+
+<section class="content">
+    @if (selectedChat) {
+      <app-chat-window [chat]="selectedChat"></app-chat-window>
+    } @else {
+      <div class="placeholder">Выберите чат слева</div>
+    }
+  </section>

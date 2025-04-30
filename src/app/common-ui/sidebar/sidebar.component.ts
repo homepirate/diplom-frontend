@@ -26,7 +26,7 @@ export class SidebarComponent {
       link: 'calendar',
     },
     {
-      label: 'Чат',
+      label: 'Чаты',
       icon: 'chats', 
       link: 'chats',
     },

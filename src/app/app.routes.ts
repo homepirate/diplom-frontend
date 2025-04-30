@@ -11,18 +11,19 @@ import { AddPatientPageComponent } from './pages/add-patient-page/add-patient-pa
 import { ReportPageComponent } from './pages/report-page/report-page.component';
 import { canActivateAuth } from './auth/access.guard';
 import { PatientProfilePageComponent } from './pages/patient-profile-page/patient-profile-page.component';
+import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 // import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
 export const routes: Routes = [
     {path: '', component: LayoutComponent, children: [
         {path: '', redirectTo: 'calendar', pathMatch: 'prefix'},
         {path: 'profile/:id', component: PatientProfilePageComponent},
-    //     {path: 'settings', component: SettingsPageComponent},
         {path: 'calendar', component: CalendarPageComponent},
         {path: 'services', component: ServicesPageComponent},
         {path: 'patients', component: PatientsPageComponent},
         {path: 'add-patient', component: AddPatientPageComponent},
-        {path: 'report', component: ReportPageComponent}
+        {path: 'report', component: ReportPageComponent},
+        {path: 'chats', component: ChatPageComponent}
 
 
     ],
