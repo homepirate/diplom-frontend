@@ -1,6 +1,31 @@
-.small-btn {
-    width: 600px;
-}
-
-.composer {
-}
+.chat-window {
+    display: flex;
+    flex-direction: column;
+    height: 900px;
+    border: 1px solid var(--light-color);
+    padding: 8px;
+  }
+  
+  .messages {
+    flex: 1;              
+    overflow-y: auto;
+    margin-bottom: 8px;
+  }
+  
+  .composer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .composer .tt-input {
+    flex: 1;
+  }
+  
+  .composer {
+    white-space: nowrap;
+  }
+  
+  .small-btn {
+    width: 150px;
+  }

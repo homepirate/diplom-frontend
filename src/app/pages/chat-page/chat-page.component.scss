@@ -1,6 +1,25 @@
 :host {
-    padding: 24px;
     display: grid;
-    grid-gap: 64px;
     grid-template-columns: 400px 1fr;
+    grid-gap: 64px;
+    padding: 24px;
+    height: 90vh;
+}
+
+.chats-list {
+    overflow-y: auto;
+}
+
+.content {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    height: calc(100vh - 48px);
+    display: flex;
+    flex-direction: column;
+}
+
+.content app-chat-window {
+    flex: 1;
+    overflow-y: auto;
 }
