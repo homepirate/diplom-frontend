@@ -8,7 +8,9 @@
 
 <section class="content">
     @if (selectedChat) {
-      <app-chat-window [chat]="selectedChat"></app-chat-window>
+      <app-chat-window [chat]="selectedChat"
+      (newMessageEvent)="onNewMessage($event)"
+      ></app-chat-window>
     } @else {
       <div class="placeholder">Выберите чат слева</div>
     }

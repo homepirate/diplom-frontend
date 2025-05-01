@@ -31,7 +31,7 @@ export class ChatService {
     }
 
     this.stompClient = new Client({
-      webSocketFactory: () => new SockJS('/ws-chat'),
+      webSocketFactory: () => new SockJS(`${this.baseApiUrl}/ws-chat`),
       reconnectDelay: 5000,
       debug: (str: string) => console.log('[STOMP]', str)
     });
@@ -63,7 +63,7 @@ export class ChatService {
       return;
     }
     this.stompClient.publish({
-      destination: '/app/chat.sendMessage',
+      destination: `/app/chat.sendMessage`,
       body: JSON.stringify(msg),
     });
   }

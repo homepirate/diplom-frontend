@@ -49,4 +49,18 @@ export class ChatPageComponent implements OnInit {
       });
   }
 
+
+  onNewMessage(event: { conversationId: string; content: string }) {
+    const { conversationId, content } = event;
+    this.chats = this.chats.map(c =>
+      c.conversationId === conversationId
+        ? { ...c, lastMessage: content }
+        : c
+    );
+
+    if (this.selectedChat?.conversationId === conversationId) {
+      this.selectedChat = { ...this.selectedChat, lastMessage: content };
+    }
+  }
+
 }

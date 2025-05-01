@@ -1,27 +1,32 @@
 <div class="chat-window">
-    <div class="header">
-      Чат с <strong>{{ chat.partnerName }}</strong>
-    </div>
-  
-    <div class="messages">
-      @for (msg of messages; track msg.timestamp) {
-        <div
-          class="message"
-          [class.mine]="msg.senderId === me?.id"
-          [class.theirs]="msg.senderId !== me?.id"
-        >
-          {{ msg.content }}
-        </div>
-      }
-    </div>
-  
-    <div class="composer">
-      <input
-        [(ngModel)]="newMessage"
-        (keyup.enter)="send()"
-        placeholder="Введите сообщение…"
-      />
-      <button (click)="send()">Отправить</button>
-    </div>
+  <div class="header">
+    Чат с <strong>{{ chat.partnerName }}</strong>
   </div>
-  
+
+  <div class="messages" #messagesContainer>
+    @for (msg of messages; track msg.timestamp) {
+      <div
+        class="message"
+        [class.mine]="msg.senderId === me?.id"
+        [class.theirs]="msg.senderId !== me?.id"
+      >
+        <strong>
+          {{ msg.senderId === me?.id 
+              ? 'You:' 
+              : (chat.partnerName + ':') 
+          }}
+        </strong>
+        {{ msg.content }}
+      </div>
+    }
+  </div>
+
+  <div class="composer">
+    <input class="tt-input mb4"
+      [(ngModel)]="newMessage"
+      (keyup.enter)="send()"
+      placeholder="Введите сообщение…"
+    />
+    <button class="btn btn-shadow small-btn" (click)="send()">Отправить</button>
+  </div>
+</div>
