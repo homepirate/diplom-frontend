@@ -37,7 +37,6 @@ export class CalendarPageComponent {
     if (this.selectedDate) {
       this.doctorService.getDoctorVisitsByDay(this.selectedDate)
         .subscribe((visits: VisitDateResponse[]) => {
-          // Сортировка массива по дате визита (от ранней к поздней)
           this.visitsByDay = visits.sort((a, b) => {
             const dateA = new Date(a.visitDate);
             const dateB = new Date(b.visitDate);

@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Patient } from '../../data/interfaces/patient.inerface';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-patient-card',
@@ -10,6 +10,15 @@ import { RouterLink } from '@angular/router';
 })
 export class PatientCardComponent {
   @Input() patient!: Patient;
+  router = inject(Router)
 
+  openChat() {
+    this.router.navigate(['/chats'], {
+      state: { 
+        partnerId: this.patient.id,
+        partnerName: this.patient.fullName
+      }
+    });
+  }
 
 }

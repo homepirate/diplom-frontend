@@ -36,16 +36,13 @@ export class ReportPageComponent {
       const rawStartDate = this.form.value.startDate as string;
       const rawEndDate = this.form.value.endDate as string;
       
-      // Преобразуем дату в формат dd-MM-yyyy
       const payload = {
         startDate: this.formatDate(rawStartDate),
         endDate: this.formatDate(rawEndDate)
       };
 
       this.doctorService.getFinancialDashboardReport(payload).subscribe(blob => {
-        // Создаём URL из полученного Blob
         const objectUrl = URL.createObjectURL(blob);
-        // Снимаем ограничения безопасности для использования в [src]
         this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(objectUrl);
       }, error => {
         console.error("Ошибка при получении отчёта:", error);
