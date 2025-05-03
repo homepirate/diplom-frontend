@@ -28,3 +28,11 @@
 .password-eye-btn.active {
     color: var(--primary-color)
 }
+.link{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.tt-input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }

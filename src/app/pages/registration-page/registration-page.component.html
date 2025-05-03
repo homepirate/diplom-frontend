@@ -23,16 +23,27 @@
         formControlName="fullName"
         class="tt-input" type="text" placeholder="Введите ФИО">
     </label>
-
-    <label class="tt-control-label mb16">
-        Специализация
-        <select formControlName="specialization" class="tt-input">
-            <option value="" disabled selected>Выберите специализацию</option>
-            @for (spec of specializations; track spec){
-            <option>{{ spec }}</option>
-            }
-        </select>
-    </label>
+    @if(isDoctor()) {
+        <label class="tt-control-label mb16">
+            Специализация
+            <select formControlName="specialization" class="tt-input">
+                <option value="" disabled selected>Выберите специализацию</option>
+                @for (spec of specializations; track spec){
+                <option>{{ spec }}</option>
+                }
+            </select>
+        </label>
+    }
+    @else {
+        <label class="tt-control-label mb16">
+            Дата рождения
+            <input
+              formControlName="birthDate"
+              class="tt-input"
+              type="date"
+            />
+          </label>
+    }
 
     <label class="tt-control-label mb32">
         Пароль
@@ -51,10 +62,12 @@
     </label>
 
 
-
-
     <button class="btn btn-shadow mb16" type="submit">Зарегистрироваться</button>
-    <button class="btn btn-shadow" type="button" [routerLink]="['/login']">Вход</button>
-
+    <button class="btn btn-shadow mb16" type="button" [routerLink]="['/login']">Вход</button>
+    <a
+    class="link"
+    (click)="toggleMode()">
+    {{ isDoctor() ? 'Я пациент' : 'Я доктор' }}
+  </a>
 </form>
 <!-- <img src="/assetrs/svg/logo-big.srv" alt="logo"> -->

@@ -41,6 +41,10 @@ export class AuthService {
       return this.http.post<Object>(`${this.baseApiUrl}register/doctor`, payload)
     }
 
+    register_patient(payload: {email: string, password: string, phone: string, fullName: string, birthDate: string}){
+      return this.http.post<Object>(`${this.baseApiUrl}register/patient`, payload)
+    }
+
     logout(){
       this.cookieService.deleteAll()
       this.token = null
