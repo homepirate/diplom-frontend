@@ -15,6 +15,7 @@ export class LoginPageComponent {
   authService = inject(AuthService)
   router = inject(Router)
   notificationService = inject(NotificationService)
+  errorMessage: string | null = null;
 
   isPasswordVisible = signal<boolean>(false)
 
@@ -23,17 +24,24 @@ export class LoginPageComponent {
     password: new FormControl<string | null>(null, Validators.required)
   })
 
-  onSubmit(){
-    console.log(this.form.value)
-    if (this.form.valid){
-      //@ts-ignore
-      this.authService.login(this.form.value).subscribe(
-        (        res: any) => {
-          this.notificationService.initialize()
-          this.router.navigate([''])
-          console.log(res)
+  onSubmit() {
+    console.log(this.form.value);
+    if (this.form.valid) {
+      // @ts-ignore
+      this.authService.login(this.form.value).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.notificationService.initialize();
+          this.router.navigate(['']);
+        },
+        error: (err) => {
+          if (err.status === 401) {
+            this.errorMessage = 'Неверная почта или пароль';
+          } else {
+            this.errorMessage = 'Ошибка при попытке входа. Попробуйте позже.';
+          }
         }
-      )
+      });
     }
   }
 }

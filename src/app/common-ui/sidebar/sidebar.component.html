@@ -5,13 +5,25 @@
 
 <nav>
     <ul class="main-menu-list">
-        @for (item of menuItems; track item.label){
-        <li>
-            <a class="menu-item" [routerLink]="[item.link]" routerLinkActive="active">
-                <svg [icon]="item.icon"></svg>
-                <span>{{ item.label }}</span>
-            </a>
-        </li>
+        @if(me.roles.includes('PATIENT')){
+            @for (item of menuItems.slice(0, 2); track item.label){
+                <li>
+                    <a class="menu-item" [routerLink]="[item.link]" routerLinkActive="active">
+                        <svg [icon]="item.icon"></svg>
+                        <span>{{ item.label }}</span>
+                    </a>
+                </li>
+            }
+        }
+        @else {
+            @for (item of menuItems; track item.label){
+            <li>
+                <a class="menu-item" [routerLink]="[item.link]" routerLinkActive="active">
+                    <svg [icon]="item.icon"></svg>
+                    <span>{{ item.label }}</span>
+                </a>
+            </li>
+        }
     }
     </ul>
 </nav>

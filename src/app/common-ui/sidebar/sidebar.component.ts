@@ -9,7 +9,7 @@ import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [SvgIconComponent, RouterLink, AsyncPipe, ImgUrlPipe, RouterLinkActive],
+  imports: [SvgIconComponent, RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })

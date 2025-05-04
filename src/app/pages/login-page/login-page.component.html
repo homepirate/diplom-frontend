@@ -3,6 +3,12 @@
     [formGroup]="form"
     (ngSubmit)="onSubmit()">
     <h1 class="h1 mb60">Вход</h1>
+
+     @if(errorMessage){
+        <div style="color: red;">
+            {{ errorMessage }}
+        </div>
+     }
     <label class="tt-control-label mb16">
         Почта
         <input 
@@ -31,4 +37,3 @@
     <button class="btn btn-shadow" type="button" [routerLink]="['/registration']">Регистрация</button>
 
 </form>
-<!-- <img src="/assetrs/svg/logo-big.srv" alt="logo"> -->
