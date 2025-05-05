@@ -4,8 +4,8 @@
 :root {
     --dark-color: #000000;
     --light-color: #ffffff;
-    --primary-color: #ae7aff;
-    --gray-color: #5f646d;
+    --primary-color: #90caf9;
+    --gray-color: #4d4f53;
     --dark-hover-color: #161616;
     --light-transparent-color: rgba(255, 255,255, 0.75)
 }
@@ -23,7 +23,8 @@ body {
     font-family: "JetBrains Mono", sans-serif;
     background: var(--dark-color);
     color: var(--light-color);
-    background-image: url(/assets/imgs/background.jpg);
+    // background-image: url(/assets/imgs/background.jpg);
+    background-image: url(/assets/imgs/bkg.jpeg);
 }
 
 .skill-tag {
