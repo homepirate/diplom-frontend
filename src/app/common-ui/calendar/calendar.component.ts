@@ -1,8 +1,13 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { DoctorService } from '../../data/services/doctor.service';
 import { VisitDateResponse } from '../../data/interfaces/visitDateResponse.interface';
 import { CalendarDay } from '../../data/interfaces/calendarDay.interface';
 import { DatePipe, NgClass } from '@angular/common';
+import { PatientService } from '../../data/services/patient.sevice';
+import { CookieService } from 'ngx-cookie-service';
+import { DecodedToken } from '../../auth/auth.interface';
+import { jwtDecode } from 'jwt-decode';
+import { PatientVisitDetailsResponse } from '../../data/interfaces/PatientVisitDetailsResponse.interface';
 
 @Component({
   selector: 'app-calendar',
@@ -12,15 +17,32 @@ import { DatePipe, NgClass } from '@angular/common';
 })
 export class CalendarComponent implements OnInit {
   @Output() daySelected = new EventEmitter<string>();
+
   days: CalendarDay[] = [];
   currentMonth!: number;
   currentYear!: number;
-  // selectedDay теперь хранит строковое представление выбранной даты
-  selectedDay: string | null | CalendarDay = null;
+  selectedDay: string | null = null;
 
-  doctorService = inject(DoctorService)
+  private doctorService = inject(DoctorService);
+  private patientService = inject(PatientService);
+  private cookieService = inject(CookieService);
+
+  private me!: DecodedToken;
+  isPatient = false;
 
   ngOnInit(): void {
+    // Декодируем токен и определяем роль
+    const token = this.cookieService.get('token');
+    if (token) {
+      try {
+        this.me = jwtDecode<DecodedToken>(token);
+        this.isPatient = this.me.roles.includes('PATIENT');
+      } catch {
+        console.error('Не удалось декодировать токен');
+      }
+    }
+
+    // Инициализируем месяц/год и загружаем визиты
     const now = new Date();
     this.currentMonth = now.getMonth() + 1;
     this.currentYear = now.getFullYear();
@@ -28,27 +50,50 @@ export class CalendarComponent implements OnInit {
   }
 
   loadVisits(): void {
-    this.doctorService.getDoctorVisits(this.currentMonth, this.currentYear)
-      .subscribe((visits: VisitDateResponse[]) => {
-        const dayMap: { [date: string]: number } = {};
-        visits.forEach(visit => {
-          // Форматируем дату в виде 'YYYY-MM-DD' с использованием локального представления (en-CA)
-          const date = new Date(visit.visitDate);
-          const dateStr = date.toLocaleDateString('en-CA');
-          dayMap[dateStr] = (dayMap[dateStr] || 0) + 1;
-        });
+    // Накопим мапу, где ключ — дата YYYY-MM-DD, значение — число визитов
+    const dayMap: Record<string, number> = {};
+    const callback = () => this.buildCalendar(dayMap);
 
-        const daysInMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
-        this.days = [];
-        for (let day = 1; day <= daysInMonth; day++) {
-          const date = new Date(this.currentYear, this.currentMonth - 1, day);
-          const dateStr = date.toLocaleDateString('en-CA');
-          this.days.push({
-            date: dateStr,
-            visitsCount: dayMap[dateStr] || 0
+    if (this.isPatient) {
+      // Для пациента — один запрос всех его визитов
+      this.patientService.getPatientVisits(this.me.id).subscribe({
+        next: (visits: PatientVisitDetailsResponse[]) => {
+          visits.forEach(v => {
+            const dateStr = new Date(v.visitDate).toLocaleDateString('en-CA');
+            dayMap[dateStr] = (dayMap[dateStr] || 0) + 1;
           });
-        }
+          callback();
+        },
+        error: err => console.error('Ошибка загрузки визитов пациента', err)
       });
+    } else {
+      // Для доктора — запрос по месяцу/году
+      this.doctorService.getDoctorVisits(this.currentMonth, this.currentYear)
+        .subscribe({
+          next: (visits: VisitDateResponse[]) => {
+            visits.forEach(v => {
+              const dateStr = new Date(v.visitDate).toLocaleDateString('en-CA');
+              dayMap[dateStr] = (dayMap[dateStr] || 0) + 1;
+            });
+            callback();
+          },
+          error: err => console.error('Ошибка загрузки визитов доктора', err)
+        });
+    }
+  }
+
+  private buildCalendar(dayMap: Record<string, number>) {
+    const daysInMonth = new Date(this.currentYear, this.currentMonth, 0).getDate();
+    this.days = [];
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(this.currentYear, this.currentMonth - 1, d);
+      const dateStr = date.toLocaleDateString('en-CA');
+      this.days.push({
+        date: dateStr,
+        visitsCount: dayMap[dateStr] || 0
+      });
+    }
   }
 
   selectDay(day: CalendarDay): void {
@@ -63,8 +108,8 @@ export class CalendarComponent implements OnInit {
     } else {
       this.currentMonth--;
     }
-    this.loadVisits();
     this.selectedDay = null;
+    this.loadVisits();
   }
 
   nextMonth(): void {
@@ -74,8 +119,7 @@ export class CalendarComponent implements OnInit {
     } else {
       this.currentMonth++;
     }
-    this.loadVisits();
     this.selectedDay = null;
+    this.loadVisits();
   }
-
 }

@@ -1,0 +1,29 @@
+@if (visit){
+    <div class="profile-card mb16">
+        <div class="avatar-name">
+                <div class="profile-card__name">
+                    <strong class="h6">{{ visit.visitDate | date: 'dd.MM HH:mm' }}</strong>
+                </div>  
+        </div>
+        <div class="profile-card-__description">{{visit.notes}}</div>
+        <div class="profile-card-__description">Врач: {{visit.doctorName}}</div>
+        <div class="profile-card-__description">  Статус: {{ visit.isFinished ? 'завершен' : 'не завершен' }}
+        </div>
+        <div class="profile-card-__description">Общая стоимость: {{ visit.totalPrice }}</div>
+        <div class="stack-wrapper">
+            Услуги:
+            @for (service of visit.services; track service.serviceId) {
+                <div class="service-tag">{{ service.name }}</div>
+            }
+        </div>
+        <div class="profile-card-__actions">
+            <button 
+            type="button" 
+            class="btn btn-secondary"
+            (click)="onViewAttachments()">
+            Посмотреть вложения
+            </button>
+        </div>
+    </div>
+
+}

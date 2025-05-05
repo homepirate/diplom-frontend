@@ -2,11 +2,32 @@
     <div class="calendar-page__grid">
       <div class="calendar-page__calendar">
         <app-calendar (daySelected)="onDaySelected($event)"></app-calendar>
-        <app-add-visit (visitCreated)="refreshVisits()"></app-add-visit>
+        @if(!me.roles.includes('PATIENT')) {
+          <app-add-visit (visitCreated)="refreshVisits()"></app-add-visit>
+        }
       </div>
       <div class="calendar-page__visits">
-        @for (visit of visitsByDay; track visit.visitId) {
-          <app-visit-card [visit]="visit"></app-visit-card>
+        @if(!me.roles.includes('PATIENT')) {
+          @for(visit of visitsByDay; track visit.visitId) {
+            <app-visit-card [visit]="visit"></app-visit-card>
+          }
+        } @else {
+          @for(visit of patientVisitsByDay; track visit.visitId) {
+            <app-patient-visit-card [visit]="visit"
+            (viewAttachments)="onToggleAttachments(visit.visitId)"></app-patient-visit-card>
+            @if (expandedVisitIds.has(visit.visitId)) {
+              <div class="attachments mb16">
+                  @if (visit.attachmentUrls.length > 0) {
+                      @for (url of visit.attachmentUrls; track url) {
+                        <app-attachment [attachmentUrl]="url" class="mb4"></app-attachment>
+                      }
+                    }
+                    @else {
+                      <p>Вложения отсутствуют</p>
+                    }
+              </div>
+            }
+          }
         }
       </div>
     </div>

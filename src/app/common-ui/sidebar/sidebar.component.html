@@ -30,12 +30,16 @@
 
 <footer class="sidebar__footer">
     @if(me; as me){
-        <div class="username-container">
-            <div class="medium-text username-text mb4">{{ me.fullName }}</div>
-            <div class="small-text username-text">code:{{ me.code }}</div>
-        </div>
-    <a [routerLink]="['settings']" class="settings-btn">
-        <svg icon="settings"></svg>
-    </a>
+        @if(me.roles.includes('PATIENT')) {
+            <div class="small-text email-text">{{ me.email }}</div>
+          } @else {
+            <div class="username-container">
+              <div class="medium-text username-text mb4">{{ me.fullName }}</div>
+              <div class="small-text username-text">code:{{ me.code }}</div>
+            </div>
+            <a [routerLink]="['settings']" class="settings-btn">
+              <!-- <svg icon="settings"></svg> -->
+            </a>
+          }
     }
 </footer>
