@@ -37,8 +37,12 @@ export class CalendarPageComponent  implements OnInit{
   patientService = inject(PatientService);
 
   expandedVisitIds = new Set<string>();
+  fileToUpload: File | null = null;
 
+  viewExpandedVisitIds = new Set<string>();
 
+  addFormVisitIds = new Set<string>();
+ 
 
 
   ngOnInit(): void {
@@ -94,11 +98,48 @@ export class CalendarPageComponent  implements OnInit{
   }
 
 
-  onToggleAttachments(visitId: string) {
-    if (this.expandedVisitIds.has(visitId)) {
-      this.expandedVisitIds.delete(visitId);
+  onToggleViewAttachments(visitId: string) {
+    if (this.viewExpandedVisitIds.has(visitId)) {
+      this.viewExpandedVisitIds.delete(visitId);
     } else {
-      this.expandedVisitIds.add(visitId);
+      this.viewExpandedVisitIds.add(visitId);
+      this.addFormVisitIds.delete(visitId);
     }
   }
+
+
+  onToggleAddForm(visitId: string) {
+    if (this.addFormVisitIds.has(visitId)) {
+      this.addFormVisitIds.delete(visitId);
+      this.fileToUpload = null;
+    } else {
+      this.addFormVisitIds.add(visitId);
+      this.viewExpandedVisitIds.delete(visitId);
+
+    }
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files?.length) {
+      this.fileToUpload = input.files[0];
+    }
+  }
+
+  onSubmitAttachment(visitId: string) {
+    if (!this.fileToUpload) return;
+    const fd = new FormData();
+    fd.append('visitId', visitId);
+    fd.append('file', this.fileToUpload);
+    fd.append('description', 'added from calendar');
+
+    this.patientService.addAttachment(fd).subscribe({
+      next: () => {
+        this.loadPatientVisits()
+        this.addFormVisitIds.delete(visitId)
+      },
+      error: err => console.error('Ошибка загрузки вложения', err)
+    });
+  }
 }
+

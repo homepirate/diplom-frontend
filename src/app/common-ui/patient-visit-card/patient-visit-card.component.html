@@ -16,12 +16,18 @@
                 <div class="service-tag">{{ service.name }}</div>
             }
         </div>
-        <div class="profile-card-__actions">
+        <div class="profile-card__actions">
             <button 
             type="button" 
             class="btn btn-secondary"
             (click)="onViewAttachments()">
             Посмотреть вложения
+            </button>
+            <button 
+            type="button" 
+            class="btn btn-secondary ml16"
+            (click)="onLoadAttachment()">
+            Добавить вложение
             </button>
         </div>
     </div>

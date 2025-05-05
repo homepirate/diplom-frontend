@@ -13,20 +13,41 @@
           }
         } @else {
           @for(visit of patientVisitsByDay; track visit.visitId) {
-            <app-patient-visit-card [visit]="visit"
-            (viewAttachments)="onToggleAttachments(visit.visitId)"></app-patient-visit-card>
-            @if (expandedVisitIds.has(visit.visitId)) {
+            <app-patient-visit-card
+              [visit]="visit"
+              (viewAttachments)="onToggleViewAttachments(visit.visitId)"
+              (loadAttachment)="onToggleAddForm(visit.visitId)">
+            </app-patient-visit-card>
+  
+            @if (viewExpandedVisitIds.has(visit.visitId)) {
               <div class="attachments mb16">
-                  @if (visit.attachmentUrls.length > 0) {
-                      @for (url of visit.attachmentUrls; track url) {
-                        <app-attachment [attachmentUrl]="url" class="mb4"></app-attachment>
-                      }
-                    }
-                    @else {
-                      <p>Вложения отсутствуют</p>
-                    }
+                @if (visit.attachmentUrls.length > 0) {
+                  @for (url of visit.attachmentUrls; track url) {
+                    <app-attachment [attachmentUrl]="url" class="mb4"></app-attachment>
+                  }
+                } @else {
+                  <p>Вложения отсутствуют</p>
+                }
               </div>
             }
+  
+            @if (addFormVisitIds.has(visit.visitId)) {
+              <div class="attachments">
+                <input class="mb16"
+                  type="file" 
+                  (change)="onFileSelected($event)" 
+                  required
+                />
+                <button 
+                  class="btn" 
+                  type="button" 
+                  (click)="onSubmitAttachment(visit.visitId)"
+                >
+                  Отправить вложение
+                </button>
+              </div>
+            }
+            
           }
         }
       </div>

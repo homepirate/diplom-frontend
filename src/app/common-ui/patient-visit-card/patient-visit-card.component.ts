@@ -12,10 +12,15 @@ export class PatientVisitCardComponent {
 
   @Input() visit!: PatientVisitDetailsResponse;
   @Output() viewAttachments = new EventEmitter<void>();
+  @Output() loadAttachment = new EventEmitter<void>()
 
 
   onViewAttachments() {
     this.viewAttachments.emit();
+  }
+
+  onLoadAttachment() {
+    this.loadAttachment.emit()
   }
 
 

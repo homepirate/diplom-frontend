@@ -35,4 +35,13 @@ export class PatientService {
       { params }
     );
   }
+
+
+  addAttachment(formData: FormData): Observable<any> {
+    console.log(formData)
+    return this.http.post(
+      `${this.baseApiUrl}add-attachment`,
+      formData
+    );
+  }
 }
