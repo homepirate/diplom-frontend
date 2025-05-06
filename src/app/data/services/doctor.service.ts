@@ -4,6 +4,8 @@ import { Service } from '../interfaces/service.interface';
 import { Patient } from '../interfaces/patient.inerface';
 import { VisitDateResponse } from '../interfaces/visitDateResponse.interface';
 import { Observable } from 'rxjs';
+import { ServiceUpdateRequest } from '../interfaces/ServiceUpdateRequest.interface';
+import { StatusResponse } from '../interfaces/status-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +49,17 @@ export class DoctorService {
 
   getFinancialDashboardReport(payload: { startDate: string; endDate: string }): Observable<Blob> {
     return this.http.post(`${this.baseApiUrl}report`, payload, { responseType: 'blob' });
+  }
+
+  finishVisit(request: {
+    id: string;
+    services: ServiceUpdateRequest[];
+    notes: string;
+  }): Observable<StatusResponse> {
+    return this.http.put<StatusResponse>(
+      `${this.baseApiUrl}visits/finish`,
+      request
+    );
   }
 
 }

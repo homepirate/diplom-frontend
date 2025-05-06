@@ -27,13 +27,22 @@
                     <div class="service-tag">{{ service.name }}</div>
                 }
             </div>
-            <div class="profile-card-__actions">
+            <div class="profile-card__actions">
                 <button 
                 type="button" 
                 class="btn btn-secondary"
                 (click)="onViewAttachments()">
                 Посмотреть вложения
                 </button>
+
+                @if(!visit.isFinished) {
+                    <button
+                      type="button"
+                      class="btn btn-secondary ml16"
+                      (click)="endVisit()">
+                      Завершить визит
+                    </button>
+                  }
             </div>
         }
     </div>

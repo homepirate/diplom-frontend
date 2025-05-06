@@ -15,6 +15,8 @@ export class VisitCardComponent {
   @Input() hidePatient: boolean = false;
 
   @Output() viewAttachments = new EventEmitter<void>();
+  @Output() startFinish = new EventEmitter<void>();
+
 
 
   isVisitDateResponse(v: VisitDateResponse | PatientVisitDetailsResponse): v is VisitDateResponse {
@@ -31,6 +33,10 @@ export class VisitCardComponent {
         console.log(this.visit.attachmentUrls)
     }
     this.viewAttachments.emit();
+  }
+
+  endVisit(){
+    this.startFinish.emit();
   }
 
 }
