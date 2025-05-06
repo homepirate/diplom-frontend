@@ -92,11 +92,12 @@ export class PatientProfilePageComponent  implements OnInit{
     this.patientService.getPatientVisits(this.patientId)
       .subscribe({
         next: visits => {
-          if (this.me?.fullName) {
-            this.visits = visits.filter(v => v.doctorName === this.me.fullName);
-          } else {
-            this.visits = visits;
-          }
+          const filtered = this.me?.fullName
+            ? visits.filter(v => v.doctorName === this.me.fullName)
+            : visits;
+          this.visits = filtered.sort((a, b) =>
+            new Date(b.visitDate).getTime() - new Date(a.visitDate).getTime()
+          );
         },
         error: err => console.error('Ошибка при загрузке визитов', err)
       });
