@@ -62,4 +62,11 @@ export class DoctorService {
     );
   }
 
+  cancelVisit(id: string): Observable<StatusResponse> {
+    return this.http.delete<StatusResponse>(
+      `${this.baseApiUrl}visits/cancel`,
+      { params: { id } }
+    );
+  }
+
 }

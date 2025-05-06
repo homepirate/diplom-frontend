@@ -9,3 +9,22 @@
     display: flex;
     flex-direction: column;
 }
+
+.count-input {
+    background-color: var(--light-color);
+    width: 100px;
+    color: var(--dark-color)
+}
+
+.finish-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+.colored-area {
+    color: var(--dark-color);
+    background-color: var(--light-color);
+    border-radius: 4px;
+}

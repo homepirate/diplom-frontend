@@ -11,7 +11,8 @@
         @for (visit of visits; track visit.visitId) {
           <app-visit-card [visit]="visit" [hidePatient]="true" 
           (viewAttachments)="onToggleAttachments(visit.visitId)"
-          (startFinish)="onStartFinish(visit)"></app-visit-card>
+          (startFinish)="onStartFinish(visit)"
+          (cancel)="onCancelVisit(visit.visitId)"></app-visit-card>
 
           @if (expandedVisitIds.has(visit.visitId)) {
             <div class="attachments mb16">
@@ -26,14 +27,13 @@
             </div>
           }
           @if (finishFormVisitId === visit.visitId) {
-            <div class="finish-form mb16">
-              <h4>Завершить визит</h4>
-    
+            <div class="finish-form mb16">    
               <!-- Выбор количества по каждой услуге -->
               @for (service of serviceList; track service.name) {
-                <label class="service-input">
+                <label class="tt-form-label">
                   {{ service.name }}
                   <input
+                    class="tt-input count-input"
                     type="number"
                     min="0"
                     [value]="quantities[service.name]"
@@ -42,9 +42,9 @@
                 </label>
               }
     
-              <label class="notes-input">
+              <label class="tt-form-label">
                 Примечания:
-                <textarea [(ngModel)]="finishNotes"></textarea>
+                <textarea class="tt-textarea colored-area" [(ngModel)]="finishNotes"></textarea>
               </label>
     
               <button

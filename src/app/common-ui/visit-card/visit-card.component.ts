@@ -16,8 +16,15 @@ export class VisitCardComponent {
 
   @Output() viewAttachments = new EventEmitter<void>();
   @Output() startFinish = new EventEmitter<void>();
+  @Output() cancel = new EventEmitter<void>();
+  private today = new Date(new Date().toDateString());
 
 
+  get canCancel(): boolean {
+    if (!this.visit?.visitDate) return false;
+    const visitDate = new Date(this.visit.visitDate);
+    return !this.visit.isFinished && visitDate > this.today;
+  }
 
   isVisitDateResponse(v: VisitDateResponse | PatientVisitDetailsResponse): v is VisitDateResponse {
     return (v as VisitDateResponse).patientName !== undefined;
@@ -38,5 +45,10 @@ export class VisitCardComponent {
   endVisit(){
     this.startFinish.emit();
   }
+
+  onCancel()  { 
+    this.cancel.emit(); 
+  }
+
 
 }

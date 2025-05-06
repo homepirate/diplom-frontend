@@ -27,6 +27,17 @@
                     <div class="service-tag">{{ service.name }}</div>
                 }
             </div>
+
+            @if(canCancel) {
+                <button
+                  type="button"
+                  class="btn btn-secondary ml16"
+                  (click)="onCancel()">
+                  Отменить визит
+                </button>
+            }
+
+
             <div class="profile-card__actions">
                 <button 
                 type="button" 

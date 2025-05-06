@@ -52,6 +52,7 @@ export class PatientProfilePageComponent  implements OnInit{
       this.expandedVisitIds.delete(visitId);
     } else {
       this.expandedVisitIds.add(visitId);
+      this.finishFormVisitId = null
     }
   }
   
@@ -78,8 +79,13 @@ export class PatientProfilePageComponent  implements OnInit{
   }
 
   onStartFinish(visit: PatientVisitDetailsResponse | VisitDateResponse) {
-    this.finishFormVisitId = visit.visitId;
-    this.finishNotes = visit.notes;
+    if (this.finishFormVisitId === visit.visitId) {
+      this.finishFormVisitId = null;
+    } else {
+      this.expandedVisitIds.delete(visit.visitId);
+      this.finishFormVisitId = visit.visitId;
+      this.finishNotes = visit.notes;
+    }
   }
 
   private loadVisits() {
@@ -111,6 +117,16 @@ export class PatientProfilePageComponent  implements OnInit{
         this.loadVisits();
       },
       error: err => console.error('Не удалось завершить визит', err)
+    });
+  }
+
+
+  onCancelVisit(visitId: string) {
+    this.doctorService.cancelVisit(visitId).subscribe({
+      next: (res: StatusResponse) => {
+        this.loadVisits();
+      },
+      error: err => console.error('Не удалось отменить визит', err)
     });
   }
 }
