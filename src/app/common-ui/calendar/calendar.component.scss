@@ -24,7 +24,7 @@
 
 .calendar-day {
   padding: 8px;
-  border: none; /* по умолчанию без рамки */
+  border: none;
   text-align: center;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -37,17 +37,15 @@
   .visits-count {
     display: block;
     font-size: 12px;
-    color: var(--gray-color);
+    color: var(--gray-light-color);
     margin-top: 4px;
   }
 }
 
-/* Если у дня есть записи (visitsCount > 0), то применяется серая рамка */
 .with-border {
-  border: 1px solid var(--gray-color);
+  border: 1px solid var(--gray-light-color);
 }
 
-/* Если день выбран, то рамка становится цвета var(--primary-color) */
 .selected {
   border: 1px solid var(--primary-color);
 }
