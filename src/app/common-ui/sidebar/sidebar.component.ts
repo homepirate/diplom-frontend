@@ -52,6 +52,23 @@ export class SidebarComponent {
     },
   ]
 
+  menuItemsPatient = [
+    {
+      label: 'Записи',
+      icon: 'calendar', 
+      link: 'calendar',
+    },
+    {
+      label: 'Чаты',
+      icon: 'chats', 
+      link: 'chats',
+    },
+    {
+      label: 'Врачи',
+      icon: 'people', 
+      link: 'doctors',
+    },
+  ]
   
   ngOnInit(): void {
     const token = this.cookieService.get('token');

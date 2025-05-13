@@ -1,0 +1,14 @@
+@if (doctor){
+    <div class="profile-card mb16">
+        <div class="avatar-name">
+            <div class="profile-card__name">
+                <strong class="h6">{{ doctor.fullName }}</strong>
+            </div>
+        </div>
+
+        <div class="profile-card-__description"> Специализация: {{ doctor.specialization }}</div>
+        <div class="profile-card__action-btns">
+                <button class="btn" (click)="openChat()">Чат</button>
+        </div> 
+    </div>
+}

@@ -4,6 +4,8 @@ import { Patient } from '../interfaces/patient.inerface';
 import { Observable } from 'rxjs';
 import { PatientVisitDetailsResponse } from '../interfaces/PatientVisitDetailsResponse.interface';
 import { PatientProfile } from '../interfaces/PatientProfile.interface';
+import { StatusResponse } from '../interfaces/status-response.interface';
+import { Doctor } from '../interfaces/doctor.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +44,17 @@ export class PatientService {
     return this.http.post(
       `${this.baseApiUrl}add-attachment`,
       formData
+    );
+  }
+
+  getPatientDoctors(): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${this.baseApiUrl}doctors`);
+  }
+
+  linkDoctor(doctorCode: string): Observable<StatusResponse> {
+    return this.http.post<StatusResponse>(
+      `${this.baseApiUrl}link-doctor`,
+      { doctorCode }
     );
   }
 }

@@ -7,6 +7,8 @@ import { jwtDecode } from 'jwt-decode';
 import { ChatPrevComponent } from "../../common-ui/chat-prev/chat-prev.component";
 import { ChatWindowComponent } from "../../common-ui/chat-window/chat-window.component";
 import { Router } from '@angular/router';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-chat-page',
@@ -53,7 +55,7 @@ export class ChatPageComponent implements OnInit {
   private openFromState() {
     const nav = this.router.getCurrentNavigation();
     const partnerId = nav?.extras.state?.['partnerId'] ?? history.state.partnerId;
-    const partnerName = nav?.extras.state?.['partnerName'] ?? history.state.partnerId;
+    const partnerName = nav?.extras.state?.['partnerName'] ?? history.state.partnerName;
     if (partnerId && this.me) {
       this.openOrCreateChat(partnerId, partnerName);
     }
@@ -69,7 +71,7 @@ export class ChatPageComponent implements OnInit {
       this.selectChat(exists);
     } else {
       const newChat: Chat = {
-        conversationId: uuidv4(),                // или Date.now().toString()
+        conversationId: uuidv4(),
         partnerId,
         partnerName,
         lastMessage: '',
@@ -99,7 +101,5 @@ onNewMessage(event: { conversationId: string; content: string }) {
 
 
 }
-function uuidv4(): string {
-  throw new Error('Function not implemented.');
-}
+
 

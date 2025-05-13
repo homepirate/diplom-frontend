@@ -1,0 +1,30 @@
+
+<form class="service-create-form mb32" [formGroup]="addDoctorForm" (ngSubmit)="onSubmit()">
+  <h1 class="h4"> Добавить врача по коду</h1>
+    <label class="tt-control-label">
+      <input
+        type="number"
+        class="tt-input mb16"
+        formControlName="code"
+        [class.invalid]="addDoctorForm.get('code')?.invalid && addDoctorForm.get('code')?.touched"
+        placeholder="Код"
+      >
+  
+      @if (addDoctorForm.get('code')?.invalid && addDoctorForm.get('code')?.touched) {
+        <div class="error">
+          Пожалуйста, введите код
+        </div>
+      }
+    </label>
+  
+    <button type="submit" class="btn btn-shadow mb16">Добавить врача</button>
+  </form>
+
+<div class="doctors-card__wrapper">
+    @for (doctor of doctors(); track doctor.id){
+        <app-doctor-card
+        [doctor]="doctor"
+        >
+        </app-doctor-card>
+    }
+</div>
