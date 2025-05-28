@@ -34,7 +34,6 @@ export class AddVisitComponent {
   })
    
   onSubmit(): void {
-    // Проверка заполненности формы
     if (!this.form.valid) {
       console.warn('Форма невалидна!');
       return;

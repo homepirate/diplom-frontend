@@ -39,6 +39,8 @@ export class PatientProfilePageComponent  implements OnInit{
   finishFormVisitId: string | null = null;
   quantities: Record<string, number> = {};
   finishNotes = '';
+  rearrangeFormVisitId: string | null = null;
+  rearrangeDate = '';
 
 
   route = inject(ActivatedRoute)
@@ -52,7 +54,8 @@ export class PatientProfilePageComponent  implements OnInit{
       this.expandedVisitIds.delete(visitId);
     } else {
       this.expandedVisitIds.add(visitId);
-      this.finishFormVisitId = null
+      this.finishFormVisitId = null;
+      this.rearrangeFormVisitId = null;
     }
   }
   
@@ -74,6 +77,7 @@ export class PatientProfilePageComponent  implements OnInit{
       for (const s of list) this.quantities[s.name] = 0;
     });
   }
+
   onVisitCreated(){
     this.loadVisits();
   }
@@ -85,8 +89,10 @@ export class PatientProfilePageComponent  implements OnInit{
       this.expandedVisitIds.delete(visit.visitId);
       this.finishFormVisitId = visit.visitId;
       this.finishNotes = visit.notes;
+      this.rearrangeFormVisitId = null;
     }
   }
+
 
   private loadVisits() {
     this.patientService.getPatientVisits(this.patientId)
@@ -130,4 +136,34 @@ export class PatientProfilePageComponent  implements OnInit{
       error: err => console.error('Не удалось отменить визит', err)
     });
   }
+
+  onStartRearrange(visit: PatientVisitDetailsResponse) {
+    if (this.rearrangeFormVisitId === visit.visitId) {
+      this.rearrangeFormVisitId = null;
+    } else {
+      this.expandedVisitIds.delete(visit.visitId);
+      this.finishFormVisitId = null;
+      this.rearrangeFormVisitId = visit.visitId;
+      this.rearrangeDate = visit.visitDate.slice(0, 16);
+    }
+  }
+
+  onSubmitRearrange(visitId: string) {
+    if (!this.rearrangeDate) return;
+
+    const payload = {
+      visitId,
+      newVisitDate: this.rearrangeDate,
+      force: false,
+    };
+
+    this.doctorService.rearrangeVisit(payload).subscribe({
+      next: () => {
+        this.rearrangeFormVisitId = null;
+        this.loadVisits();
+      },
+      error: err => console.error('Не удалось перенести визит', err)
+    });
+  }
 }
+

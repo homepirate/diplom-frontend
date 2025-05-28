@@ -61,7 +61,6 @@ export class ChatWindowComponent implements OnChanges {
       .getChatHistory(this.me.id, this.chat.partnerId)
       .subscribe((hist) => {
         this.messages = hist;
-        // сразу прокручиваем к последнему
         setTimeout(() => this.scrollToBottom(), 0);
       });
   }
@@ -72,10 +71,9 @@ export class ChatWindowComponent implements OnChanges {
       senderId: this.me.id,
       receiverId: this.chat.partnerId,
       content: this.newMessage.trim(),
-      timestamp: '', // сервер добавит время
+      timestamp: '',
       type: 'CHAT',
     };
-    // Локальное эхо
     this.scrollToBottom();
 
     // Отправка по STOMP

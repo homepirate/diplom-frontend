@@ -28,14 +28,6 @@
                 }
             </div>
 
-            @if(canCancel) {
-                <button
-                  type="button"
-                  class="btn btn-secondary ml16"
-                  (click)="onCancel()">
-                  Отменить визит
-                </button>
-            }
 
 
             <div class="profile-card__actions">
@@ -45,16 +37,35 @@
                 (click)="onViewAttachments()">
                 Посмотреть вложения
                 </button>
+            </div>
 
-                @if(!visit.isFinished) {
+            <div class="profile-card__actions">
+            @if(canCancel) {
+                <button
+                  type="button"
+                  class="btn btn-secondary ml16"
+                  (click)="onCancel()">
+                  Отменить визит
+                </button>
+            }
+
+            @if(!visit.isFinished) {
                     <button
                       type="button"
                       class="btn btn-secondary ml16"
                       (click)="endVisit()">
                       Завершить визит
                     </button>
-                  }
-            </div>
+                  
+                    <button
+                    type="button"
+                    class="btn btn-secondary ml16"
+                    (click)="rerrangeVisit()">
+                        Перенести визит
+                    </button>
+            }
+        </div>
+
         }
     </div>
 

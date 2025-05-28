@@ -1,6 +1,5 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PatientProfile } from '../../data/interfaces/PatientProfile.interface';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile-header',

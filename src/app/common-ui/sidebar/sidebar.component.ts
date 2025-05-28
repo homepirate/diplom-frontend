@@ -1,11 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
-import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { DecodedToken } from '../../auth/auth.interface';
 import { CookieService } from 'ngx-cookie-service';
 import { jwtDecode } from 'jwt-decode';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,7 +13,8 @@ import { jwtDecode } from 'jwt-decode';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
-  cookieService = inject(CookieService)
+  cookieService = inject(CookieService);
+  authService = inject(AuthService);
 
 
   me!: DecodedToken;
@@ -79,5 +79,10 @@ export class SidebarComponent {
         console.error('Ошибка декодирования токена', err);
       }
     }
+  }
+
+  logout(event: any){
+    this.authService.logout()
+  
   }
 }

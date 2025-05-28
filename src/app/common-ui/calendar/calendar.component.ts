@@ -50,7 +50,6 @@ export class CalendarComponent implements OnInit {
   }
 
   loadVisits(): void {
-    // Накопим мапу, где ключ — дата YYYY-MM-DD, значение — число визитов
     const dayMap: Record<string, number> = {};
     const callback = () => this.buildCalendar(dayMap);
 

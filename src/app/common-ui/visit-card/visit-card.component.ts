@@ -16,6 +16,7 @@ export class VisitCardComponent {
 
   @Output() viewAttachments = new EventEmitter<void>();
   @Output() startFinish = new EventEmitter<void>();
+  @Output() rerrange = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
   private today = new Date(new Date().toDateString());
 
@@ -48,6 +49,10 @@ export class VisitCardComponent {
 
   onCancel()  { 
     this.cancel.emit(); 
+  }
+
+  rerrangeVisit(){
+    this.rerrange.emit();
   }
 
 

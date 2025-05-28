@@ -74,17 +74,10 @@
     border-radius: 2px;
     padding: 4px;
     display: grid;
-    grid-template-columns: 32px 1fr 16px;
+    grid-template-columns: 32px 1fr max-content;
     grid-gap: 12px;
     align-items: center;
     white-space: nowrap;
-
-
-    .footer__profile-img {
-        width: 32px;
-        height: 32px;
-        border-radius: 50%;
-    }
 
     .username-container {
         display: flex;
@@ -98,12 +91,9 @@
     }
 }
 
-.settings-btn {
+.logout-link {
     justify-self: end;
-
-    svg {
-        width: 24px;
-        height: 24px;
-        color: var(--primary-color);
-    }
+    text-decoration: underline;
+    cursor: pointer;
 }
+

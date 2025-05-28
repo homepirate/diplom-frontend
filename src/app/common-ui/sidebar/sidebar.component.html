@@ -33,9 +33,12 @@
               <div class="medium-text username-text mb4">{{ me.fullName }}</div>
               <div class="small-text username-text">code:{{ me.code }}</div>
             </div>
-            <a [routerLink]="['settings']" class="settings-btn">
-              <!-- <svg icon="settings"></svg> -->
-            </a>
           }
     }
+    <a
+    class="logout-link"
+    (click)="logout($event)"
+    >
+    Выйти
+    </a>
 </footer>

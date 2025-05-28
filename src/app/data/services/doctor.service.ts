@@ -69,4 +69,10 @@ export class DoctorService {
     );
   }
 
+  rearrangeVisit(payload: {visitId: string;  newVisitDate: string;  force: boolean;}){
+    return this.http.put<StatusResponse>(`${this.baseApiUrl}visits/rearrange`,
+      payload
+    )
+  }
+
 }

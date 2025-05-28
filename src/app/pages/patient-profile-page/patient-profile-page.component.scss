@@ -28,3 +28,8 @@
     background-color: var(--light-color);
     border-radius: 4px;
 }
+
+
+.tt-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
