@@ -57,4 +57,10 @@ export class PatientService {
       { doctorCode }
     );
   }
+
+  deleteAllPatientData(): Observable<StatusResponse> {
+    return this.http.delete<StatusResponse>(
+      `${this.baseApiUrl}delete-all-patient-data`
+    );
+  }
 }

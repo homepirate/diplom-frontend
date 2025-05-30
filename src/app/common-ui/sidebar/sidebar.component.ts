@@ -68,6 +68,11 @@ export class SidebarComponent {
       icon: 'people', 
       link: 'doctors',
     },
+    {
+      label: 'Настройки',
+      icon: 'settings',
+      link: 'settings',
+    }
   ]
   
   ngOnInit(): void {

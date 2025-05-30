@@ -11,6 +11,7 @@ import { canActivateAuth } from './auth/access.guard';
 import { PatientProfilePageComponent } from './pages/patient-profile-page/patient-profile-page.component';
 import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 import { DoctorsPageComponent } from './pages/doctors-page/doctors-page.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 
 export const routes: Routes = [
     {path: '', component: LayoutComponent, children: [
@@ -22,7 +23,8 @@ export const routes: Routes = [
         {path: 'add-patient', component: AddPatientPageComponent},
         {path: 'report', component: ReportPageComponent},
         {path: 'chats', component: ChatPageComponent},
-        {path: 'doctors', component: DoctorsPageComponent}
+        {path: 'doctors', component: DoctorsPageComponent},
+        {path: 'settings', component: SettingsPageComponent}
 
 
     ],
