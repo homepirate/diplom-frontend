@@ -10,7 +10,7 @@
         [class.mine]="msg.senderId === me?.id"
         [class.theirs]="msg.senderId !== me?.id"
       >
-        <strong>
+        <strong class="sender">
           {{ msg.senderId === me?.id 
               ? 'You:' 
               : (chat.partnerName + ':') 

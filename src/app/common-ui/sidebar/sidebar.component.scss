@@ -89,11 +89,15 @@
         font-weight: 700;
         color: var(--primary-color);
     }
+    .email-text {
+        color: var(--light-color);
+    }
 }
 
 .logout-link {
     justify-self: end;
     text-decoration: underline;
     cursor: pointer;
+    color: var(--light-color);
 }
 
