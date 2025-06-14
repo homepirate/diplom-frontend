@@ -2,7 +2,7 @@
     display: block;
     padding: 20px 12px;
     position: relative;
-    background: var(--dark-color);
+    background: var(--gray-color);
 }
 
 .main-menu-list {
@@ -32,7 +32,7 @@
     &.active,
     &:hover,
     &:focus-visible {
-        background: var(--dark-hover-color);
+        background: var(--gray-hover-color);
         color: var(--primary-color);
 
         .menu-item svg {
@@ -70,7 +70,7 @@
     position: absolute;
     width: calc(100% - 20px);
     bottom: 20px;
-    background: var(--dark-hover-color);
+    background: var(--gray-hover-color);
     border-radius: 2px;
     padding: 4px;
     display: grid;

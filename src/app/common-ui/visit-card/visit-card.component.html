@@ -16,7 +16,16 @@
             <div class="profile-card-__description">Пациент: {{ visit.patientName }}</div>
 
         }
-        <div class="profile-card-__description">{{visit.notes}}</div>
+        <!-- <div class="profile-card-__description">{{visit.notes}}</div> -->
+        <div class="profile-card-__description">
+            {{ truncatedNotes }}
+              <button
+                type="button"
+                class="show-full-notes"
+                (click)="openNotesModal()">
+                Показать полностью
+              </button>
+          </div>
         <div class="profile-card-__description">  Статус: {{ visit.isFinished ? 'завершен' : 'не завершен' }}
         </div>
         @if(hidePatient && isPatientVisitDetailsResponse(visit)){
@@ -70,3 +79,21 @@
     </div>
 
 }
+
+@if (isNotesModalOpen) {
+    <div class="modal-backdrop" (click)="closeNotesModal()">
+      <div class="modal-window" (click)="$event.stopPropagation()">
+        <h3>Примечания к визиту</h3>
+        <textarea
+          class="tt-textarea big-textarea"
+          readonly>{{ visit.notes }}</textarea>
+        <div class="modal-actions">
+          <button
+            class="btn btn-shadow"
+            (click)="closeNotesModal()">
+            Закрыть
+          </button>
+        </div>
+      </div>
+    </div>
+  }

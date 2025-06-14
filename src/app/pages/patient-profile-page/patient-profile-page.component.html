@@ -27,32 +27,38 @@
                   }
             </div>
           }
+
           @if (finishFormVisitId === visit.visitId) {
-            <div class="finish-form mb16">    
-              @for (service of serviceList; track service.name) {
+            <div class="modal-backdrop" (click)="finishFormVisitId = null">
+              <div class="modal-window" (click)="$event.stopPropagation()">
+                <h2 class="mb16">Завершить визит</h2>
+                @for (service of serviceList; track service.name) {
+                  <label class="tt-form-label">
+                    {{ service.name }}
+                    <input
+                      class="tt-input count-input"
+                      type="number" min="0"
+                      [value]="quantities[service.name]"
+                      (input)="quantities[service.name] = +$any($event.target).value"
+                    />
+                  </label>
+                }
                 <label class="tt-form-label">
-                  {{ service.name }}
-                  <input
-                    class="tt-input count-input"
-                    type="number"
-                    min="0"
-                    [value]="quantities[service.name]"
-                    (input)="quantities[service.name] = +$any($event.target).value"
-                  />
+                  Примечания:
+                  <textarea
+                    class="tt-textarea big-textarea"
+                    [(ngModel)]="finishNotes">
+                  </textarea>
                 </label>
-              }
-    
-              <label class="tt-form-label">
-                Примечания:
-                <textarea class="tt-textarea colored-area" [(ngModel)]="finishNotes"></textarea>
-              </label>
-    
-              <button
-                class="btn btn-shadow"
-                type="button"
-                (click)="onSubmitFinish(visit.visitId)">
-                Сохранить
-              </button>
+                <div class="modal-actions">
+                  <button class="btn btn-shadow" (click)="onSubmitFinish(finishFormVisitId!)">
+                    Сохранить
+                  </button>
+                  <button class="btn btn-link" (click)="finishFormVisitId = null">
+                    Отмена
+                  </button>
+                </div>
+              </div>
             </div>
           }
 

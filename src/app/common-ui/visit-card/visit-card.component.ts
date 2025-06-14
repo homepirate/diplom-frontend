@@ -21,6 +21,23 @@ export class VisitCardComponent {
   private today = new Date(new Date().toDateString());
 
 
+  isNotesModalOpen = false;
+
+  get truncatedNotes(): string {
+    const max = 100;
+    const txt = this.visit.notes || '';
+    return txt.length > max ? txt.slice(0, max) + '...' : txt;
+  }
+
+  openNotesModal(): void {
+    this.isNotesModalOpen = true;
+  }
+
+  closeNotesModal(): void {
+    this.isNotesModalOpen = false;
+  }
+
+
   get canCancel(): boolean {
     if (!this.visit?.visitDate) return false;
     const visitDate = new Date(this.visit.visitDate);
